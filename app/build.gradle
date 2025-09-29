@@ -16,12 +16,19 @@ android {
     }
 
     buildTypes {
+        // ✅ add this block
+        debug {
+            // disables native symbol stripping for CI
+            ndk {
+                debugSymbolLevel 'none'
+            }
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
@@ -44,8 +51,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services:12.0.1'
     implementation "com.google.firebase:firebase-core:17.2.3"
     implementation "com.google.firebase:firebase-crash:16.2.1"
-
 }
+
 ant.importBuild 'assets.xml'
 preBuild.dependsOn(list, checksum)
 clean.dependsOn(clean_assets)
