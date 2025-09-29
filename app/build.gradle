@@ -16,11 +16,10 @@ android {
     }
 
     buildTypes {
-        // ✅ add this block
         debug {
-            // disables native symbol stripping for CI
-            ndk {
-                debugSymbolLevel 'none'
+            // ✅ disables .so stripping for old plugin versions
+            packagingOptions {
+                doNotStrip "**/*.so"
             }
         }
 
